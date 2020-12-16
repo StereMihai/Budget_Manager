@@ -30,6 +30,7 @@ public class Menu {
                 "4) Balance \n" +
                 "5) Save \n" +
                 "6) Load \n" +
+                "7) Analyze (Sort) \n" +
                 "0) Exit \n");
         Scanner scanner = new Scanner(System.in);
 
@@ -58,7 +59,6 @@ public class Menu {
                         break;
 
                 case 2:
-
                     System.out.println();
                     typeOfPurchase();
 
@@ -91,6 +91,10 @@ public class Menu {
                 case 5:
                     System.out.println();
                     SaveAndLoadPurchases.savePurchases();
+                    SaveAndLoadPurchases.saveFood();
+                    SaveAndLoadPurchases.saveClothes();
+                    SaveAndLoadPurchases.saveEntertainment();
+                    SaveAndLoadPurchases.saveOthers();
                     menu();
                     break;
 
@@ -102,9 +106,23 @@ public class Menu {
 //                    SaveAndLoadPurchases.loadPurchases();
                     arrayList = SaveAndLoadPurchases.loadPurchases();
                     purchaseTotalPrice = SaveAndLoadPurchases.test();
+                    foodArrayList = SaveAndLoadPurchases.loadFood();
+                    foodPurchaseTotalPrice = SaveAndLoadPurchases.foodPrice();
+                    clothesArrayList = SaveAndLoadPurchases.loadClothes();
+                    clothesPurchaseTotalPrice = SaveAndLoadPurchases.clothesPrice();
+                    entertainmentArrayList = SaveAndLoadPurchases.loadEntertainment();
+                    entertainmentPurchaseTotalPrice = SaveAndLoadPurchases.entertainmentPrice();
+                    otherArrayList = SaveAndLoadPurchases.loadOther();
+                    otherPurchaseTotalPrice = SaveAndLoadPurchases.otherPrice();
+
+
                     menu();
                     break;
 
+                case 7:
+                    System.out.println();
+                    typeOfSorting();
+                    break;
 
                 default:
                     System.out.println();
@@ -112,6 +130,89 @@ public class Menu {
                     System.out.println();
                    //System.exit(1);
             }
+        }
+    }
+
+    public static void typeOfSorting() throws IOException{
+
+        boolean flag = true;
+
+        System.out.println("How do you want to sort? \n" +
+                "1) Sort all purchases \n" +
+                "2) Sort by type \n" +
+                "3) Sort certain type \n" +
+                "4) Back \n");
+
+        Scanner scanner = new Scanner(System.in);
+        int action = scanner.nextInt();
+
+        while (flag) {
+            switch (action) {
+                case 4:
+                    System.out.println();
+                    menu();
+                    break;
+                case 1:
+                    System.out.println();
+                    SortItems.sortedAll();
+                    System.out.println();
+                    typeOfSorting();
+                    break;
+                case 2:
+                    System.out.println();
+                    SortItems.sortByType();
+                    System.out.println();
+                    typeOfSorting();
+                    break;
+                case 3:
+                    System.out.println();
+                    sortingByType();
+                    System.out.println();
+                    break;
+                default: flag = false;
+                break;
+            }
+
+
+
+
+        }
+    }
+
+    public static void sortingByType() throws IOException{
+
+        boolean flag = true;
+
+        System.out.println("Choose the type of purchase \n" +
+                "1) Food\n" +
+                "2) Clothes \n" +
+                "3) Entertainment \n" +
+                "4) Other \n");
+
+        Scanner scanner = new Scanner(System.in);
+        int action = scanner.nextInt();
+
+        switch (action) {
+            case 1:
+                System.out.println();
+                SortItems.sortByFood();
+                System.out.println();
+                typeOfSorting();
+            case 2:
+                System.out.println();
+                SortItems.sortByClothes();
+                System.out.println();
+                typeOfSorting();
+            case 3 :
+                System.out.println();
+                SortItems.sortByEntertainment();
+                System.out.println();
+                typeOfSorting();
+            case 4:
+                System.out.println();
+                SortItems.sortByOthers();
+                System.out.println();
+                typeOfSorting();
         }
     }
 
@@ -349,13 +450,36 @@ public class Menu {
         }
     }
 
-    public static List returnTotalListOfPurchases() {
+    public static double returnTotalSum() {
+        return purchaseTotalPrice;
+    }
+    public static double returnFoodSum() {
+        return foodPurchaseTotalPrice;
+    }
+    public static double returnClothesSum(){
+        return clothesPurchaseTotalPrice;
+    }
+    public static double returnEntertainmentSum(){
+        return entertainmentPurchaseTotalPrice;
+    }
+    public static double returnOtherSum(){
+        return otherPurchaseTotalPrice;
+    }
 
+    public static List returnTotalListOfPurchases() {
         return arrayList;
     }
-    public static double returnTotalAmountSpent() {
-
-        return purchaseTotalPrice;
+    public static List returnTotalFood(){
+        return foodArrayList;
+    }
+    public static List returnTotalClothes() {
+        return clothesArrayList;
+    }
+    public static List returnTotalEntertainment(){
+        return entertainmentArrayList;
+    }
+    public static List returnTotalOther(){
+        return otherArrayList;
     }
 
 

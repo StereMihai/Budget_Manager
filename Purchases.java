@@ -9,7 +9,7 @@ public class Purchases {
     private static List clothes = new ArrayList();
     private static List entertainment = new ArrayList();
     private static List other = new ArrayList();
-    private static double  totalPrice = 0;
+    private static double totalPrice = 0;
     private static double foodPrice = 0;
     private static double clothesPrice = 0;
     private static double entertainmentPrice = 0;
